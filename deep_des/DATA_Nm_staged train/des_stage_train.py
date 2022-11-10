@@ -28,12 +28,12 @@ def first_stage(n, num_rounds=7, pairs=8):
     print('Number of devices: %d' % strategy.num_replicas_in_sync)
     batch_size = bs * strategy.num_replicas_in_sync
     with strategy.scope():
-        net = load_model("../DATA_N_good_trained_nets/des_"+str(num_rounds-1) + '_pairs' +
+        net = load_model("../DATA_Nm_good_trained_nets/des_"+str(num_rounds-1) + '_pairs' +
                          str(pairs) + '_distinguisher.h5')
         net_json = net.to_json()
         net_first = model_from_json(net_json)
         net_first.compile(optimizer='adam', loss='mse', metrics=['acc'])
-        net_first.load_weights("../DATA_N_good_trained_nets/des_"+str(num_rounds-1) + '_pairs' +
+        net_first.load_weights("../DATA_Nm_good_trained_nets/des_"+str(num_rounds-1) + '_pairs' +
                                str(pairs) + '_distinguisher.h5')
 
     process_number = 50
